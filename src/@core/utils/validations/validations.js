@@ -1,4 +1,5 @@
 import { extend, localize } from 'vee-validate'
+
 import {
   required as rule_required,
   email as rule_email,
@@ -13,8 +14,11 @@ import {
   alpha_num as rule_alpha_num,
   length as rule_length,
 } from 'vee-validate/dist/rules'
-import ar from 'vee-validate/dist/locale/ar.json'
 import en from 'vee-validate/dist/locale/en.json'
+import de from 'vee-validate/dist/locale/de.json'
+import es from 'vee-validate/dist/locale/es.json'
+import fr from 'vee-validate/dist/locale/fr.json'
+import pt from 'vee-validate/dist/locale/pt_BR.json'
 
 // eslint-disable-next-line object-curly-newline
 import { validatorPositive, validatorUrlValidator, validatorPassword, validatorCreditCard } from './validators'
@@ -67,7 +71,6 @@ export const url = extend('url', {
   message: 'URL is invalid',
 })
 
-// Install English and Arabic localizations.
 localize({
   en: {
     messages: en.messages,
@@ -81,19 +84,56 @@ localize({
       },
     },
   },
-  ar: {
-    messages: ar.messages,
+  es: {
+    messages: es.messages,
     names: {
-      email: 'البريد الإلكتروني',
-      password: 'كلمة السر',
+      email: 'Correo electrónico',
+      password: 'contraseña',
     },
     fields: {
       password: {
-        min: 'كلمة السر قصيرة جداً سيتم اختراقك',
+        min: '{_field_} es demasiado corto, ¿quieres ser hackeado?',
+      },
+    },
+  },
+  de: {
+    messages: de.messages,
+    names: {
+      email: 'Email',
+      password: 'Passwort',
+    },
+    fields: {
+      password: {
+        min: '{_field_} ist zu kurz, du willst gehackt werden?',
+      },
+    },
+  },
+  fr: {
+    messages: fr.messages,
+    names: {
+      email: 'E-mail',
+      password: 'Mot de passe',
+    },
+    fields: {
+      password: {
+        min: '{_field_} est trop court, vous voulez vous faire pirater?',
+      },
+    },
+  },
+  pt: {
+    messages: pt.messages,
+    names: {
+      email: 'E-mail',
+      password: 'Senha',
+    },
+    fields: {
+      password: {
+        min: '{_field_} é muito curto, você deseja ser hackeado?',
       },
     },
   },
 })
+localize('es')
 // ////////////////////////////////////////////////////////
 // NOTE:
 // Quasar validation for reference only

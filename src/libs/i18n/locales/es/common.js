@@ -1,4 +1,6 @@
 export default {
+  brandApp: 'Lioncore',
+  loading: 'Cargando',
   all: 'Todo',
   new: 'Nuevo',
   list: 'Lista',

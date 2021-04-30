@@ -4,7 +4,10 @@
     toggle-class="d-flex align-items-center dropdown-user-link"
     class="dropdown-user"
   >
-    <template #button-content>
+    <template
+      v-if="userData"
+      #button-content
+    >
       <div class="d-sm-flex d-none user-nav">
         <p class="user-name font-weight-bolder mb-0">
           {{ userData.fullName || userData.username }}
@@ -137,7 +140,7 @@ export default {
   },
   data() {
     return {
-      userData: JSON.parse(localStorage.getItem('userData')),
+      userData: useJwt.getUserData(),
       avatarText,
     }
   },
@@ -149,7 +152,7 @@ export default {
       localStorage.removeItem(useJwt.jwtConfig.storageRefreshTokenKeyName)
 
       // Remove userData from localStorage
-      localStorage.removeItem('userData')
+      localStorage.removeItem(useJwt.jwtConfig.storageUserDataKeyName)
 
       // Reset ability
       this.$ability.update(initialAbility)

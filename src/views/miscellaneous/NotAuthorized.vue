@@ -35,6 +35,7 @@
 import { BLink, BImg, BButton } from 'bootstrap-vue'
 import VuexyLogo from '@core/layouts/components/Logo.vue'
 import store from '@/store/index'
+import useJwt from '@/auth/jwt/useJwt'
 import { getHomeRouteForLoggedInUser } from '@/auth/utils'
 
 export default {
@@ -51,14 +52,13 @@ export default {
       if (store.state.appConfig.layout.skin === 'dark') {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.downImg = require('@/assets/images/pages/not-authorized-dark.svg')
-        return this.downImg
       }
       return this.downImg
     },
   },
   methods: {
     loginRoute() {
-      const user = JSON.parse(localStorage.getItem('userData'))
+      const user = useJwt.getUserData()
       return getHomeRouteForLoggedInUser(user ? user.role : null)
     },
   },

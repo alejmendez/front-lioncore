@@ -9,15 +9,15 @@
           <vuexy-logo />
 
           <h2 class="brand-text text-primary ml-1">
-            Vuexy
+            {{ $t('common.brandApp') }}
           </h2>
         </b-link>
 
         <b-card-title class="mb-1">
-          Reset Password 🔒
+          {{ $t('resetPassword.title') }}
         </b-card-title>
         <b-card-text class="mb-2">
-          Your new password must be different from previously used passwords
+          {{ $t('resetPassword.subtitle') }}
         </b-card-text>
 
         <!-- form -->
@@ -30,12 +30,12 @@
 
             <!-- password -->
             <b-form-group
-              label="New Password"
+              :label="$t('resetPassword.new_password')"
               label-for="reset-password-new"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Password"
+                :name="$t('resetPassword.new_password')"
                 vid="Password"
                 rules="required|password"
               >
@@ -67,11 +67,11 @@
             <!-- confirm password -->
             <b-form-group
               label-for="reset-password-confirm"
-              label="Confirm Password"
+              :label="$t('resetPassword.confirm_password')"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Confirm Password"
+                :name="$t('resetPassword.confirm_password')"
                 rules="required|confirmed:Password"
               >
                 <b-input-group
@@ -105,14 +105,14 @@
               type="submit"
               variant="primary"
             >
-              Set New Password
+              {{ $t('resetPassword.set_new_password') }}
             </b-button>
           </b-form>
         </validation-observer>
 
         <p class="text-center mt-2">
-          <b-link :to="{name:'auth-login-v1'}">
-            <feather-icon icon="ChevronLeftIcon" /> Back to login
+          <b-link :to="{name:'auth-login'}">
+            <feather-icon icon="ChevronLeftIcon" /> {{ $t('resetPassword.back_to_login') }}
           </b-link>
         </p>
 

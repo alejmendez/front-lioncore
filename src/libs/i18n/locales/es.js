@@ -1,4 +1,3 @@
-import esValidate from 'vee-validate/dist/locale/es.json'
 // import es from './es/es.json'
 
 import login from './es/login'
@@ -21,7 +20,6 @@ import role from './es/role'
 
 export default {
   // ...es,
-  validation: esValidate.messages,
   common,
   login,
   register,

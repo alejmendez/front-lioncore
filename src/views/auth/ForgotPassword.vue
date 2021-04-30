@@ -9,15 +9,15 @@
           <vuexy-logo />
 
           <h2 class="brand-text text-primary ml-1">
-            Vuexy
+            {{ $t('common.brandApp') }}
           </h2>
         </b-link>
 
         <b-card-title class="mb-1">
-          Forgot Password? 🔒
+          {{ $t('forgotPassword.title') }}
         </b-card-title>
         <b-card-text class="mb-2">
-          Enter your email and we'll send you instructions to reset your password
+          {{ $t('forgotPassword.subtitle') }}
         </b-card-text>
 
         <!-- form -->
@@ -28,18 +28,18 @@
           >
             <!-- email -->
             <b-form-group
-              label="Email"
+              :label="$t('forgotPassword.email')"
               label-for="forgot-password-email"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Email"
+                :name="$t('forgotPassword.email')"
                 rules="required|email"
               >
                 <b-form-input
                   id="forgot-password-email"
                   v-model="userEmail"
-                  :state="errors.length > 0 ? false:null"
+                  :state="errors.length > 0 ? false : null"
                   name="forgot-password-email"
                   placeholder="john@example.com"
                 />
@@ -53,14 +53,14 @@
               block
               type="submit"
             >
-              Send reset link
+              {{ $t('forgotPassword.send_reset_link') }}
             </b-button>
           </b-form>
         </validation-observer>
 
         <b-card-text class="text-center mt-2">
-          <b-link :to="{name:'auth-login-v1'}">
-            <feather-icon icon="ChevronLeftIcon" /> Back to login
+          <b-link :to="{name:'auth-login'}">
+            <feather-icon icon="ChevronLeftIcon" /> {{ $t('forgotPassword.back_to_login') }}
           </b-link>
         </b-card-text>
 
@@ -104,7 +104,7 @@ export default {
     validationForm() {
       this.$refs.simpleRules.validate().then(success => {
         if (success) {
-          this.$router.push({ name: 'auth-reset-password-v1' })
+          this.$router.push({ name: 'auth-reset-password' })
         }
       })
     },

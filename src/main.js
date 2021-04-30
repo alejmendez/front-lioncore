@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { ToastPlugin, ModalPlugin } from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
 
 import i18n from '@/libs/i18n'
@@ -19,13 +18,11 @@ import '@/libs/toastification'
 import '@/libs/sweet-alerts'
 import '@/libs/vue-select'
 import '@/libs/tour'
+import '@/libs/bootstrap'
+// import '@/libs/jwtAuth'
 
 // Axios Mock Adapter
 import '@/@fake-db/db'
-
-// BSV Plugin Registration
-Vue.use(ToastPlugin)
-Vue.use(ModalPlugin)
 
 // Composition API
 Vue.use(VueCompositionAPI)

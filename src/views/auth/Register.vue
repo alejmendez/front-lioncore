@@ -7,15 +7,15 @@
         <b-link class="brand-logo">
           <vuexy-logo />
           <h2 class="brand-text text-primary ml-1">
-            Vuexy
+            {{ $t('common.brandApp') }}
           </h2>
         </b-link>
 
         <b-card-title class="mb-1">
-          Adventure starts here 🚀
+          {{ $t('register.title') }}
         </b-card-title>
         <b-card-text class="mb-2">
-          Make your app management easy and fun!
+          {{ $t('register.subtitle') }}
         </b-card-text>
 
         <!-- form -->
@@ -26,18 +26,18 @@
           >
             <!-- username -->
             <b-form-group
-              label="Username"
+              :label="$t('register.username')"
               label-for="username"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Username"
+                :name="$t('register.username')"
                 rules="required"
               >
                 <b-form-input
                   id="username"
                   v-model="username"
-                  :state="errors.length > 0 ? false:null"
+                  :state="errors.length > 0 ? false : null"
                   name="register-username"
                   placeholder="johndoe"
                 />
@@ -47,12 +47,12 @@
 
             <!-- email -->
             <b-form-group
-              label="Email"
+              :label="$t('register.email')"
               label-for="email"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Email"
+                :name="$t('register.email')"
                 rules="required|email"
               >
                 <b-form-input
@@ -68,12 +68,12 @@
 
             <!-- password -->
             <b-form-group
-              label="Password"
+              :label="$t('register.password')"
               label-for="password"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Password"
+                :name="$t('register.password')"
                 rules="required"
               >
                 <b-input-group
@@ -108,8 +108,8 @@
                 v-model="status"
                 name="checkbox-1"
               >
-                I agree to
-                <b-link>privacy policy & terms</b-link>
+                {{ $t('register.i_agree_to') }}
+                <b-link>{{ $t('register.privacy_policy_terms') }}</b-link>
               </b-form-checkbox>
             </b-form-group>
 
@@ -119,21 +119,21 @@
               block
               type="submit"
             >
-              Sign up
+              {{ $t('register.register') }}
             </b-button>
           </b-form>
         </validation-observer>
 
         <b-card-text class="text-center mt-2">
-          <span>Already have an account? </span>
-          <b-link :to="{name:'auth-login-v1'}">
-            <span>Sign in instead</span>
+          <span>{{ $t('register.already_have_an_account') }} </span>
+          <b-link :to="{name:'auth-login'}">
+            <span>{{ $t('register.sign_in_instead') }}</span>
           </b-link>
         </b-card-text>
 
         <div class="divider my-2">
           <div class="divider-text">
-            or
+            {{ $t('register.or') }}
           </div>
         </div>
 

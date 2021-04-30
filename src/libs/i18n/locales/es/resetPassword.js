@@ -1,9 +1,8 @@
 export default {
-  title: 'Restablecer la contraseña',
-  description: 'Por favor ingrese su nueva contraseña.',
-  email: 'Correo electrónico',
-  password: 'Contraseña',
+  title: 'Restablecer la contraseña 🔒',
+  subtitle: 'Su nueva contraseña debe ser diferente de las contraseñas utilizadas anteriormente',
+  new_password: 'Nueva contraseña',
   confirm_password: 'Confirme su contraseña',
-  go_to_back: 'Volver',
-  reset: 'Reiniciar',
+  back_to_login: 'Atrás para iniciar sesión',
+  set_new_password: 'Establecer nueva contraseña',
 }

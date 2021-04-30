@@ -2,21 +2,27 @@
   <div class="auth-wrapper auth-v1 px-2">
     <div class="auth-inner py-2">
 
-      <!-- Login v1 -->
+      <b-overlay
+        :show="loading"
+        variant="transparent"
+        opacity="0.3"
+        rounded="sm"
+        no-wrap
+      />
       <b-card class="mb-0">
         <b-link class="brand-logo">
           <vuexy-logo />
 
           <h2 class="brand-text text-primary ml-1">
-            Vuexy
+            {{ $t('common.brandApp') }}
           </h2>
         </b-link>
 
         <b-card-title class="mb-1">
-          Welcome to Vuexy! 👋
+          {{ $t('login.title') }}
         </b-card-title>
         <b-card-text class="mb-2">
-          Please sign-in to your account and start the adventure
+          {{ $t('login.subtitle') }}
         </b-card-text>
 
         <!-- form -->
@@ -27,23 +33,25 @@
           <b-form
             class="auth-login-form mt-2"
             @submit.prevent
+            @submit="submit()"
           >
 
             <!-- email -->
             <b-form-group
               label-for="email"
-              label="Email"
+              :label="$t('login.email')"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Email"
+                :name="$t('login.email')"
                 rules="required|email"
               >
                 <b-form-input
                   id="email"
                   v-model="userEmail"
                   name="login-email"
-                  :state="errors.length > 0 ? false:null"
+                  :state="errors.length > 0 ? false : null"
+                  :disabled="loading"
                   placeholder="john@example.com"
                   autofocus
                 />
@@ -54,31 +62,35 @@
             <!-- password -->
             <b-form-group>
               <div class="d-flex justify-content-between">
-                <label for="password">Password</label>
-                <b-link :to="{name:'auth-forgot-password-v1'}">
-                  <small>Forgot Password?</small>
+                <label for="password">{{ $t('login.password') }}</label>
+                <b-link :to="{name:'auth-forgot-password'}">
+                  <small>{{ $t('login.forgot_password') }}</small>
                 </b-link>
               </div>
               <validation-provider
                 #default="{ errors }"
-                name="Password"
+                :name="$t('login.password')"
                 rules="required"
               >
                 <b-input-group
                   class="input-group-merge"
-                  :class="errors.length > 0 ? 'is-invalid':null"
+                  :class="errors.length > 0 ? 'is-invalid' : null"
                 >
                   <b-form-input
                     id="password"
                     v-model="password"
                     :type="passwordFieldType"
                     class="form-control-merge"
-                    :state="errors.length > 0 ? false:null"
+                    :state="errors.length > 0 ? false : null"
+                    :disabled="loading"
                     name="login-password"
                     placeholder="Password"
                   />
 
-                  <b-input-group-append is-text>
+                  <b-input-group-append
+                    is-text
+                    :disabled="loading"
+                  >
                     <feather-icon
                       class="cursor-pointer"
                       :icon="passwordToggleIcon"
@@ -96,33 +108,35 @@
                 id="remember-me"
                 v-model="status"
                 name="checkbox-1"
+                :disabled="loading"
               >
-                Remember Me
+                {{ $t('login.remember_me') }}
               </b-form-checkbox>
             </b-form-group>
 
             <!-- submit button -->
-            <b-button
+            <button-loading
               variant="primary"
               type="submit"
               block
-              :disabled="invalid"
+              :loading="loading"
+              :disabled="invalid || loading"
             >
-              Sign in
-            </b-button>
+              {{ $t('login.login') }}
+            </button-loading>
           </b-form>
         </validation-observer>
 
         <b-card-text class="text-center mt-2">
-          <span>New on our platform? </span>
-          <b-link :to="{name:'auth-register-v1'}">
-            <span>Create an account</span>
+          <span>{{ $t('login.new_on_our_platform') }} </span>
+          <b-link :to="{name:'auth-register'}">
+            <span>{{ $t('login.create_an_account') }}</span>
           </b-link>
         </b-card-text>
 
         <div class="divider my-2">
           <div class="divider-text">
-            or
+            {{ $t('login.or') }}
           </div>
         </div>
 
@@ -154,16 +168,12 @@
           </b-button>
         </div>
       </b-card>
-      <!-- /Login v1 -->
     </div>
   </div>
 </template>
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import {
-  BButton, BForm, BFormInput, BFormGroup, BCard, BLink, BCardTitle, BCardText, BInputGroup, BInputGroupAppend, BFormCheckbox,
-} from 'bootstrap-vue'
 import VuexyLogo from '@core/layouts/components/Logo.vue'
 import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
@@ -171,18 +181,7 @@ import { togglePasswordVisibility } from '@core/mixins/ui/forms'
 export default {
   components: {
     // BSV
-    BButton,
-    BForm,
-    BFormInput,
-    BFormGroup,
-    BCard,
-    BCardTitle,
-    BLink,
     VuexyLogo,
-    BCardText,
-    BInputGroup,
-    BInputGroupAppend,
-    BFormCheckbox,
     ValidationProvider,
     ValidationObserver,
   },
@@ -192,6 +191,7 @@ export default {
       userEmail: '',
       password: '',
       status: '',
+      loading: false,
       // validation rules
       required,
       email,
@@ -200,6 +200,23 @@ export default {
   computed: {
     passwordToggleIcon() {
       return this.passwordFieldType === 'password' ? 'EyeIcon' : 'EyeOffIcon'
+    },
+  },
+  methods: {
+    submit() {
+      this.loading = true
+      this.$auth.login({
+        email: this.userEmail,
+        password: this.password,
+      }).then(response => {
+        this.$router.push('dashboard').catch(() => {})
+        this.$auth.setData(response.data)
+        // this.$router.push({ name: 'dashboard' })
+      }).catch(error => {
+        console.log(error)
+      }).finally(() => {
+        this.loading = false
+      })
     },
   },
 }

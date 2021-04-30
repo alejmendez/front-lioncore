@@ -108,4 +108,33 @@ export default class JwtService {
       refreshToken: this.getRefreshToken(),
     })
   }
+
+  setUserData(value) {
+    this.setUserPermissions(value)
+    localStorage.setItem(this.jwtConfig.storageUserDataKeyName, JSON.stringify(value))
+  }
+
+  getUserData() {
+    return JSON.parse(localStorage.getItem(this.jwtConfig.storageUserDataKeyName))
+  }
+
+  setUserPermissions(user) {
+    const permissions = user.permissions.map(permission => {
+      const permissionParts = permission.name.split(' ')
+      return {
+        resource: permissionParts[0],
+        action: permissionParts[1],
+      }
+    })
+    localStorage.setItem(this.jwtConfig.storageUserPermissionsKeyName, JSON.stringify(permissions))
+  }
+
+  getUserPermissions() {
+    return JSON.parse(localStorage.getItem(this.jwtConfig.storageUserPermissionsKeyName))
+  }
+
+  setData(data) {
+    this.setToken(data.token)
+    this.setUserData(data.user)
+  }
 }

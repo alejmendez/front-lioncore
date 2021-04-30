@@ -5,6 +5,7 @@ export default [
     component: () => import('@/views/auth/Login.vue'),
     meta: {
       layout: 'full',
+      public: true,
     },
   },
   {
@@ -13,6 +14,7 @@ export default [
     component: () => import('@/views/auth/Register.vue'),
     meta: {
       layout: 'full',
+      public: true,
     },
   },
   {
@@ -21,6 +23,7 @@ export default [
     component: () => import('@/views/auth/ForgotPassword.vue'),
     meta: {
       layout: 'full',
+      public: true,
     },
   },
   {
@@ -29,6 +32,7 @@ export default [
     component: () => import('@/views/auth/ResetPassword.vue'),
     meta: {
       layout: 'full',
+      public: true,
     },
   },
 ]

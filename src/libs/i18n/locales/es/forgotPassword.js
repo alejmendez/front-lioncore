@@ -1,7 +1,7 @@
 export default {
-  title: 'Recupera tu contraseña',
-  description: 'Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña.',
+  title: '¿Has olvidado su contraseña? 🔒',
+  subtitle: 'Ingrese su correo electrónico y le enviaremos instrucciones para restablecer su contraseña',
   email: 'Correo electrónico',
   back_to_login: 'Volver',
-  recover_password: 'Recuperar contraseña',
+  send_reset_link: 'Enviar enlace de restablecimiento',
 }

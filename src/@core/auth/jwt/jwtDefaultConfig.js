@@ -1,15 +1,17 @@
 export default {
   // Endpoints
-  loginEndpoint: '/login',
-  registerEndpoint: '/register',
-  refreshEndpoint: '/refresh-token',
-  logoutEndpoint: '/logout',
+  loginEndpoint: '/auth/login',
+  registerEndpoint: '/auth/register',
+  refreshEndpoint: '/auth/refresh-token',
+  logoutEndpoint: '/auth/logout',
 
   // This will be prefixed in authorization header with token
   // e.g. Authorization: Bearer <token>
   tokenType: 'Bearer',
 
   // Value of this property will be used as key to store JWT token in storage
+  storageUserDataKeyName: 'userData',
+  storageUserPermissionsKeyName: 'userPermission',
   storageTokenKeyName: 'accessToken',
   storageRefreshTokenKeyName: 'refreshToken',
 }
