@@ -111,11 +111,20 @@ export default class JwtService {
 
   setUserData(value) {
     this.setUserPermissions(value)
+    this.setTokenExpiry(value)
     localStorage.setItem(this.jwtConfig.storageUserDataKeyName, JSON.stringify(value))
   }
 
   getUserData() {
     return JSON.parse(localStorage.getItem(this.jwtConfig.storageUserDataKeyName))
+  }
+
+  setTokenExpiry(value) {
+    localStorage.setItem(this.jwtConfig.storageTokenExpiryKeyName, value)
+  }
+
+  getTokenExpiry() {
+    return localStorage.getItem(this.jwtConfig.storageTokenExpiryKeyName)
   }
 
   setUserPermissions(user) {

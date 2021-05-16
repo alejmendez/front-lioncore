@@ -12,6 +12,7 @@ export default {
   // Value of this property will be used as key to store JWT token in storage
   storageUserDataKeyName: 'userData',
   storageUserPermissionsKeyName: 'userPermission',
+  storageTokenExpiryKeyName: 'tokenExpiry',
   storageTokenKeyName: 'accessToken',
   storageRefreshTokenKeyName: 'refreshToken',
 }
